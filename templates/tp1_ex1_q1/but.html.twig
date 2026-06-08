@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TP1Ex1Q1Controller!{% endblock %}
+
+{% block body %}
+
+<script>
+function ajouterElement() {
+    // Création d'un nouvel élément de liste
+    let nouvelElement = document.createElement("li");
+    nouvelElement.textContent = prompt("Entrez le nom du nouveau BUT :"); // Tu peux demander le nom via un prompt()
+    
+    // Ajout à la liste
+    document.getElementById("liste-but").appendChild(nouvelElement);
+}
+
+function supprimerDernier() {
+    let liste = document.getElementById("liste-but");
+    
+    // Vérifier si la liste possède des enfants avant de supprimer
+    if (liste.lastElementChild) {
+        liste.removeChild(liste.lastElementChild);
+    } else {
+        alert("La liste est déjà vide.");
+    }
+}
+</script>
+
+
+<div class="mt-4">
+    <h3>Liste des BUT de l'IUT de Roanne</h3>
+    <ul id="liste-but">
+        <li>BUT RT</li>
+        <li>BUT GIM</li>
+    </ul>
+
+    <button type="button" class="btn btn-success" onclick="ajouterElement()">Ajouter un élément</button>
+    <button type="button" class="btn btn-danger" onclick="supprimerDernier()">Supprimer le dernier</button>
+</div>
+
+
+{% endblock %}

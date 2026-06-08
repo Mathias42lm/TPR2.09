@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TP 1 - Manipulation DOM & jQuery{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Exercices Manipulation jQuery</h1>
+
+    {# Exercice 2-1 #}
+    <div class="card mt-3 p-3">
+        <h3>Calculateur d'âge</h3>
+        <button type="button" class="btn btn-warning">Calculateur d'âge</button>
+        <p id="id_Age" class="mt-2 font-weight-bold"></p>
+    </div>
+
+    {# Exercice 2-2 #}
+    <div class="card mt-3 p-3">
+        <h3>Effet de survol</h3>
+        <p>Survolez ce paragraphe pour voir l'effet jQuery.</p>
+        <p>Un autre paragraphe pour tester le sélecteur global.</p>
+    </div>
+
+    {# Exercice 2-3 & 2-4 #}
+    <div class="card mt-3 p-3">
+        <h3>Liste dynamique des BUT</h3>
+        <ul id="liste-but">
+            <li>BUT RT</li>
+            <li>BUT GIM</li>
+        </ul>
+        <div class="btn-group">
+            <button type="button" class="btn btn-success" id="btn-add">Ajouter</button>
+            <button type="button" class="btn btn-danger" id="btn-del">Supprimer</button>
+        </div>
+    </div>
+</div>
+
+{# Inclusion de jQuery #}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // 2-1 Calculateur d'âge
+    $('.btn-warning').on('click', function() {
+        let annee = prompt("Votre année de naissance :");
+        if (annee && !isNaN(annee)) {
+            let age = 2026 - parseInt(annee);
+            $('#id_Age').text("Vous avez environ " + age + " ans.");
+        }
+    });
+
+    // 2-2 Effet de survol
+    $('p').hover(
+        function() { $(this).css({'font-size': '24px', 'color': 'red'}); },
+        function() { $(this).css({'font-size': '', 'color': ''}); }
+    );
+
+    // 2-3 & 2-4 Gestion liste
+    $('#btn-add').on('click', function() {
+        $('#liste-but').append('<li>Nouveau BUT</li>');
+    });
+
+    $('#btn-del').on('click', function() {
+        $('#liste-but li:last').remove();
+    });
+});
+</script>
+{% endblock %}

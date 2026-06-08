@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TP1Ex1Q1Controller!{% endblock %}
+
+{% block body %}
+
+<script>
+function calculerAge() {
+    // Demander l'année de naissance
+    let annee = prompt("Veuillez entrer votre année de naissance :");
+    
+    // Vérification si l'utilisateur a annulé ou si la valeur est vide
+    if (annee === null || annee === "") return;
+
+    // Vérifier si c'est une valeur numérique
+    if (isNaN(annee)) {
+        alert("Erreur : veuillez entrer une année valide (chiffres uniquement).");
+    } else {
+        // Calcul de l'âge (année actuelle : 2026)
+        let anneeActuelle = 2026;
+        let age = anneeActuelle - parseInt(annee);
+        
+        // Affichage dans le paragraphe cible
+        document.getElementById('id_Age').innerText = "Vous avez environ " + age + " ans.";
+    }
+}
+
+function survoltxt(el) {
+    el.style.fontWeight = '700';
+    el.style.fontStyle = 'italic';
+    el.style.fontSize = '50px';
+    el.style.setProperty('color', 'red', 'important');
+    el.style.color = 'red';
+}
+function normal(el) {
+    el.style.fontWeight = '400';
+    el.style.fontStyle = 'normal';
+    el.style.fontSize = '16px';
+    el.style.color = 'blue';
+}
+
+</script>
+
+
+<div class="mt-5">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code>C:/Users/mathi/Desktop/Cour/tp_r2.09/SymfonyTP1ex1/src/Controller/TP1Ex1Q1Controller.php</code></li>
+        <li>Your template at <code>C:/Users/mathi/Desktop/Cour/tp_r2.09/SymfonyTP1ex1/templates/tp1_ex1_q1/index.html.twig</code></li>
+        <li>The date is {{ date }}</li>
+    </ul>
+    <div class="mt-3">
+        <form action="{{ path('app_t_p1_ex1_q1_bonjour') }}" method="post">
+            <div class="mb-3">
+                <label for="login" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="login" name="login" required>
+            </div>
+            <div class="mb-3">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Say Bonjour</button>
+        </form>
+    </div>
+        <div class="mt-3">
+        <button type="button" class="btn btn-warning" onclick="calculerAge()">
+            Calculateur d'âge
+        </button>
+        <p id="id_Age" class="mt-2 font-weight-bold"></p>
+    </div>
+    <div class="mt-3">
+        <p onmouseover="survoltxt(this)" onmouseout="normal(this)" class="text-info" style="cursor:default;">
+            Survolez ce texte pour voir une alerte !
+        </p>
+</div>
+{% endblock %}

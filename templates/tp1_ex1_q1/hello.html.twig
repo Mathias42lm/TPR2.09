@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Connecté{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="alert alert-success">
+        <h1>Bonjour {{ nom }} !</h1>
+        <p>Vous êtes maintenant connecté à votre espace membre.</p>
+    </div>
+    <a href="{{ path('app_t_p1_ex1_q1_login') }}" class="btn btn-secondary">Déconnexion</a>
+</div>
+{% endblock %}

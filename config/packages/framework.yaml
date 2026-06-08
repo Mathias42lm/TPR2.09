@@ -1,9 +1,15 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     secret: '%env(APP_SECRET)%'
-
-    # Note that the session will be started ONLY if you read or write from it.
-    session: true
+    # Configuration des sessions - Q4-3
+    session:
+    #A modif ici pour la faille xss
+        enabled: true
+        cookie_httponly: true
+        cookie_secure: auto      # 'auto' si tu es en HTTPS
+        gc_maxlifetime: 3600     # Session expire après 1h (3600 secondes)
+        cookie_lifetime: 3600    # Cookie expire après 1h
+        name: SYMFONYSESSID      # Nom du cookie de session
 
     #esi: true
     #fragments: true

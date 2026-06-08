@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enregistrer un message{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Ajouter un message au blog</h1>
+    <form action="{{ path('blog_save') }}" method="post">
+        <div class="mb-3">
+            <label for="pseudo" class="form-label">Pseudo</label>
+            <input type="text" name="pseudo" id="pseudo" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea name="message" id="message" class="form-control" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Publier</button>
+    </form>
+    <a href="{{ path('blog_view') }}" class="btn btn-link mt-3">Voir les messages</a>
+</div>
+{% endblock %}

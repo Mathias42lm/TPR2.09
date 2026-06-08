@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil - Connecté{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="alert alert-success">
+        <h1>🎉 Bienvenue {{ user_login }} !</h1>
+        <p>Vous êtes maintenant connecté à votre espace membre.</p>
+        <p class="text-muted">Date de connexion: <strong>{{ date }}</strong></p>
+    </div>
+
+    <div class="card mt-4 p-4">
+        <h3>Informations du Profil</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Identifiant:</strong> {{ user_login }}</p>
+                <p><strong>Statut:</strong> <span class="badge bg-success">Connecté</span></p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Heure de consultation:</strong> {{ date }}</p>
+                <p><strong>Session ID:</strong> <code class="small">{{ app.session.id }}</code></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path('app_t_p1_ex1_q1_logout') }}" class="btn btn-danger btn-lg">
+            🚪 Déconnexion
+        </a>
+        <a href="{{ path('app_t_p1_ex1_q1') }}" class="btn btn-secondary btn-lg">
+            🏠 Retour à l'accueil
+        </a>
+    </div>
+</div>
+{% endblock %}
