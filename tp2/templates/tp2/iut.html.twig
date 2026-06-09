@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{# Ajout de l'attribut enctype indispensable pour uploader un fichier #}
+<form method="post" action="{{ path('app_tp2_iut_create') }}" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="ville">Ville de l'IUT</label>
+        <input type="text" id="ville" name="ville" class="form-control" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="logoFile">Logo</label>
+        {# Modification en type="file" et changement du name #}
+        <input type="file" id="logoFile" name="logoFile" class="form-control" accept="image/*" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="universite_id">Université de rattachement</label>
+        <select id="universite_id" name="universite_id" class="form-control" required>
+            <option value="">-- Sélectionnez une université --</option>
+            {% for universite in universites %}
+                <option value="{{ universite.id }}">{{ universite.nom }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Créer l'IUT</button>
+</form>
+
+{% if message %}
+    <div class="alert alert-info mt-3">
+        {{ message }}
+    </div>
+{% endif %}
+{% endblock %}

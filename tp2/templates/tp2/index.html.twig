@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Tp2Controller!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code>C:/Users/mathi/Desktop/Cour/tp_r2.09/SymfonyTP1ex1/tp2/src/Controller/Tp2Controller.php</code></li>
+        <li>Your template at <code>C:/Users/mathi/Desktop/Cour/tp_r2.09/SymfonyTP1ex1/tp2/templates/tp2/index.html.twig</code></li>
+    </ul>
+    <p> lien vers la <a href="{{ path('app_tp2_formation') }}">page de création de formation</a>.</p>
+    <p> lien vers la <a href="{{ path('app_tp2_iut') }}">page de création d'IUT</a>.</p>
+    <p> lien vers la <a href="{{ path('app_tp2_univ') }}">page de création d'université</a>.</p>
+    <p> lien vers la <a href="{{ path('app_tp2_iutforma') }}">page de création de lien entre IUT et formation</a>.</p>
+    <p> lien vers la <a href="{{ path('app_tp2_iut_show') }}">page d'affichage des IUT</a>.</p>
+    
+</div>
+{% endblock %}

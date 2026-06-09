@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{# Ajout OBLIGATOIRE de l'enctype pour l'upload de fichiers #}
+<form method="post" action="{{ path('app_tp2_formation_create') }}" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label>Sigle</label>
+        <input type="text" name="sigle" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Intitulé</label>
+        <input type="text" name="intitule" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Logo</label>
+        {# type="file" et changement du name pour bien différencier le fichier du chemin final #}
+        <input type="file" name="logoFile" class="form-control" accept="image/*" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Créer la formation</button>
+</form>
+
+{% if message %}
+    <p class="mt-3 text-success">{{ message }}</p>
+{% endif %}
+{% endblock %}

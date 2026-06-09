@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<form method="post" action="{{ path('app_tp2_iutforma_create') }}">
+    <div class="mb-3">
+        <label>IUT</label>
+        <select name="iut_id" class="form-control" required>
+            <option value="">Sélectionnez un IUT</option>
+            {% for iut in iuts %}
+                <option value="{{ iut.id }}">{{ iut.ville }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Formation</label>
+        <select name="formation_id" class="form-control" required>
+            <option value="">Sélectionnez une formation</option>
+            {% for formation in formations %}
+                <option value="{{ formation.id }}">{{ formation.sigle }} - {{ formation.intitule }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Créer un lien entre IUT et Formation</button>
+</form>
+
+{% if message %}
+    <p class="mt-3 text-success">{{ message }}</p>
+{% endif %}
+{% endblock %}

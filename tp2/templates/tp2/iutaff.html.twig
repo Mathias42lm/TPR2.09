@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Consulter les informations d'un IUT</h2>
+
+    {# 1. Formulaire de sélection #}
+    <form method="post" action="{{ path('app_tp2_iut_show') }}" class="mb-5">
+        <div class="mb-3">
+            <label for="iut_id" class="form-label">Sélectionnez un IUT :</label>
+            <select name="iut_id" id="iut_id" class="form-select" required>
+                <option value="">-- Choisir un IUT --</option>
+                {% for iut in iuts %}
+                    <option value="{{ iut.id }}" {% if selectedIut and selectedIut.id == iut.id %}selected{% endif %}>
+                        IUT de {{ iut.ville }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Afficher la fiche</button>
+    </form>
+
+    {# 2. Affichage conditionnel des informations personnalisées #}
+    {% if selectedIut %}
+        <hr>
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <div class="d-flex align-items-start gap-4">
+                    
+                    {# 3. Logo de l'IUT #}
+                    <div class="flex-shrink-0">
+                        {% set chemin = selectedIut.logoPath|default('')|lower %}
+                        
+                        {% if chemin and ('.png' in chemin or '.jpg' in chemin or '.jpeg' in chemin or '.webp' in chemin) %}
+                            <img src="{{ asset(selectedIut.logoPath) }}" 
+                                 alt="Logo IUT {{ selectedIut.ville }}" 
+                                 style="max-width: 150px; height: auto;" 
+                                 class="img-thumbnail"
+                                 onerror="this.outerHTML='<div class=\'p-3 bg-light text-muted border text-center\' style=\'width: 150px; font-size: 0.9em;\'>Image introuvable</div>'">
+                        {% else %}
+                            <div class="p-3 bg-light text-muted border text-center d-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+                                <span class="small">
+                                    {% if selectedIut.logoPath %}
+                                        {{ selectedIut.logoPath }}
+                                    {% else %}
+                                        Aucun logo
+                                    {% endif %}
+                                </span>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    {# 4. Informations détaillées et Liste des Formations #}
+                    <div class="flex-grow-1">
+                        <h3 class="card-title text-primary">IUT de {{ selectedIut.ville }}</h3>
+                        
+                        <p class="mb-3">
+                            <strong>Université de rattachement :</strong> 
+                            {% if selectedIut.universite %}
+                                {{ selectedIut.universite.nom }}
+                            {% else %}
+                                <span class="text-danger">Non définie</span>
+                            {% endif %}
+                        </p>
+
+                        <div class="mt-4">
+                            <strong>Formations proposées :</strong>
+                            {% if selectedIut.formation is not empty %}
+                                <ul class="list-unstyled mt-2">
+                                    {% for formation in selectedIut.formation %}
+                                        
+                                        {# Ligne flex pour aligner le mini-logo et le texte #}
+                                        <li class="d-flex align-items-center mb-2">
+                                            
+                                            {% set f_chemin = formation.logoPath|default('')|lower %}
+                                            {% if f_chemin and ('.png' in f_chemin or '.jpg' in f_chemin or '.jpeg' in f_chemin or '.webp' in f_chemin) %}
+                                                {# L'unité 1.5em permet au logo de s'adapter automatiquement à la taille du texte parent #}
+                                                <img src="{{ asset(formation.logoPath) }}" 
+                                                     alt="Logo {{ formation.sigle }}" 
+                                                     style="height: 1.5em; width: auto; object-fit: contain;" 
+                                                     class="me-2 rounded"
+                                                     onerror="this.style.display='none'">
+                                            {% endif %}
+                                            
+                                            <span><strong>{{ formation.sigle }}</strong> - {{ formation.intitule }}</span>
+                                        </li>
+                                        
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="text-muted">Aucune formation rattachée à cet IUT pour le moment.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
